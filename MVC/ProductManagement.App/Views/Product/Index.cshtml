@@ -1,0 +1,374 @@
+﻿@model IEnumerable<ProductWithPriceDto>
+@{
+
+    ViewData["Title"] = "Index";
+    
+}
+
+
+<div class="form-horizontal">
+
+    <div class="form-group">
+
+        <div class="profile-content">
+
+
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Product</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Product Price</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Product Property</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            @await Html.PartialAsync("_Products", Model)
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
+                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+
+    <script >
+
+        $(document).ready(function () {
+            $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+        });
+    </script>
+    <script>
+       
+
+        function AddNewItem() {
+
+            debugger;
+            var dialog = bootbox.confirm({
+                title: "Add New Item",
+               
+
+                message: '<p><i class="fa fa-spin fa-spinner"></i> Loading...</p>',
+
+                onEscape: true,
+                buttons: {
+                    confirm: {
+                        label: "Create Product",
+                        className: "btn-success"
+                    },
+                    cancel: {
+                        label: "Cancel",
+                        className: "btn-danger"
+                    }
+                },
+                callback: function (result) {
+
+                    if (result) {
+                        debugger;
+                        var formData = $("form#product-add-form").serializeArray();
+                        $.ajax({
+                            type: "Post",
+                            data: formData,
+                            datatype: "json",
+
+                            url: "/Product/Create",
+                            success: function (data) {
+
+                                dialog.modal('hide');
+                                $("#product-table > tbody").html(data);
+                                $('[data-toggle="tooltip"]').tooltip({ container: "body" });
+
+                            },
+                            error: function (xhr) {
+                                debugger;
+
+                                alert("Some error occured while ceating. ");
+
+
+                            },
+                            complete: function () {
+
+                            }
+                        });
+                        return false;
+
+                    }
+                }
+            });
+
+            dialog.init(function () {
+                debugger;
+
+                $.ajax({
+                    type: "GET",
+                    url: "/Product/Create",
+                    success: function (data) {
+                        debugger;
+                        dialog.find(".bootbox-body").html(data);
+                    }, error: function (xhr) {
+                        debugger;
+                        alert("error in loading.")
+                    }
+                });
+            });
+
+
+        }
+
+        function EditProduct(productId, tag) {
+            var dialog = bootbox.confirm({
+                title: "Product Editing",
+                message: '<p><i class="fa fa-spin fa-spinner"></i> Loading...</p>',
+                onEscape: true,
+                backdrop: true,
+
+                buttons: {
+                    confirm: {
+                        label: "Confirm",
+                        className: "btn-success"
+                    },
+                    cancel: {
+                        label: "Cancel",
+                        className: "btn-danger"
+                    }
+                },
+                callback: function (result) {
+
+                    if (result) {
+
+                        var formData = $("form#product-update-form").serializeArray();
+
+                        $.ajax({
+                            type: "Post",
+                            data: formData,
+                            datatype: "json",
+
+                            url: "/Product/Edit",
+                            success: function (data) {
+                                dialog.modal('hide');
+                                $("#product-table > tbody").html(data);
+                                $('[data-toggle="tooltip"]').tooltip({ container: "body" });
+                             
+                              
+                            },
+                            error: function (xhr) {
+                                alert("Some error occured while updating.");
+                            },
+                            complete: function () {
+
+                            }
+                        });
+                        return false;
+
+                    }
+                }
+            });
+
+            dialog.init(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "/Product/Edit?productId=" + productId,
+                    success: function (data) {
+                        dialog.find(".bootbox-body").html(data);
+                    }, error: function (xhr) {
+                        alert("error in loading.")
+                    }
+                });
+            });
+        }
+
+        function ActiveProduct(productId, productName, icon) {
+
+            var dialog = bootbox.confirm({
+                title: "Product Activate",
+                message: '<p> Are you sure about activating <span class="font-bold">' + productName + '</span> ?</p>',
+                onEscape: true,
+                backdrop: true,
+
+                buttons: {
+                    confirm: {
+                        label: "Confirm",
+                        className: "btn-success"
+                    },
+                    cancel: {
+                        label: "Cancel",
+                        className: "btn-danger"
+                    }
+                },
+
+                callback: function (result) {
+
+                    if (result) {
+
+
+
+                        $.ajax({
+                            type: "Post",
+                            url: "/Product/ActivateProduct?productId=" + productId,
+                            success: function (data) {
+                              
+                                
+                                $("#product-table > tbody").html(data);
+                                $('[data-toggle="tooltip"]').tooltip({ container: "body" });
+                                //$(icon).replaceWith('<span class="fa fa-eye tree-status  " onclick="DeactiveProduct(' + productId + ',\'' + productName + '\', this)" style="color:Green;" data-toggle="tooltip" title="Deactive Product"></span>');
+                                dialog.modal("hide");
+                            },
+                            error: function (xhr) {
+                                alert("Some error occured while Activation!");
+                            },
+                            complete: function () {
+
+                            }
+                        });
+                        return false;
+
+                    }
+                }
+            })
+
+        }
+
+        function DeactiveProduct(productId, productName, icon) {
+
+
+            var dialog = bootbox.confirm({
+                title: "Product Deactivate",
+                message: '<p> Are you sure about deactivating  <span class="font-bold">' + productName + ' </span> ?</p>',
+
+                onEscape: true,
+                backdrop: true,
+
+                buttons: {
+                    confirm: {
+                        label: "Confirm",
+                        className: "btn-success"
+                    },
+                    cancel: {
+                        label: "Cancel",
+                        className: "btn-danger"
+                    }
+                },
+
+                callback: function (result) {
+
+                    if (result) {
+
+                        $.ajax({
+                            type: "Post",
+                            url: "/Product/DeactivateProduct?productId=" + productId,
+                            success: function (data) {
+
+                                $("#product-table > tbody").html(data);
+                                $('[data-toggle="tooltip"]').tooltip({ container: "body" });
+                                //$(icon).replaceWith('<span class="fa fa-eye-slash  tree-status" onclick="ActiveProduct(' + productId + ',\'' + productName + '\', this)" style="color:lightgrey;" data-toggle="tooltip" title="Active Product"></span>');
+                                dialog.modal("hide");
+                            },
+                            error: function (xhr) {
+                                alert("Some error occured while Deactivation!");
+                            },
+                            complete: function () {
+
+                            }
+                        });
+                        return false;
+
+                    }
+                }
+            })
+
+        }
+
+        function DeleteProduct(productId, productName, e) {
+
+
+            var dialog = bootbox.confirm({
+                title: "Product delating",
+                message: '<p> Are you sure about Deleting  <span class="font-bold">' + productName + ' </span>?</p>',
+
+                onEscape: true,
+                backdrop: true,
+
+                buttons: {
+                    confirm: {
+                        label: "Confirm",
+                        className: "btn-success"
+                    },
+                    cancel: {
+                        label: "Cancel",
+                        className: "btn-danger"
+                    }
+                },
+
+                callback: function (result) {
+
+                    if (result) {
+
+                        $.ajax({
+                            type: "Post",
+                            url: "/Product/Delete?productId=" + productId,
+                            success: function (data) {
+
+                                $("#product-table > tbody").html(data);
+                                $('[data-toggle="tooltip"]').tooltip({ container: "body" });
+                                dialog.modal("hide");
+                            },
+                            error: function (xhr) {
+                                alert("Some error occured while Deleting!");
+                            },
+                            complete: function () {
+
+                            }
+                        });
+                        return false;
+
+                    }
+                }
+            })
+
+        }
+
+
+
+        function GetProductByCategoryId() {
+
+            debugger;
+            let selectedCategoryId = $('#CategoryId').val();
+                        $.ajax({
+                            type: "Post",
+                url: "/Product/GetProductByCategoryId?categoryId=" + selectedCategoryId,
+                            success: function (data) {
+
+
+                                $("#product-table > tbody").html(data);
+                                $('[data-toggle="tooltip"]').tooltip({ container: "body" });
+                        
+                               
+                            },
+                            error: function (xhr) {
+                                alert("Some error occured");
+                            },
+                            complete: function () {
+
+                            }
+                        });
+                        }
+                       
+    </script>
+}
+

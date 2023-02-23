@@ -1,0 +1,55 @@
+﻿@model ProductDto
+@{
+    ViewBag.Title = "Create Product";
+    Layout = null;
+
+    var categoryList = ViewBag.Category as List<CategoryDto>;
+ 
+}
+
+<div class="form-horizontal">
+<form id="product-add-form">
+
+
+
+
+    <div class="row" style="font-size:14px;">
+        <div class="col-md-12">
+            <div class="form-row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                <div class="form-group col-md-6">
+                    <label>Category</label>
+                        <select class="form-select" name="CategoryId" id="CategoryBrowsers">
+                            <option>--</option>
+                            @foreach (var category in categoryList)
+                        {
+                                <option value=@category.Id>@category.Name </option>
+
+                        }
+                    </select>
+                </div>
+
+
+                <div class="form-group col-md-6">
+                    <label class="control-label"> Product Name </label>
+                        <input id="ProductName" name="ProductName" class="form-control" required />
+                </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label checkbox-inline">
+                            <input type="checkbox" name="IsActive" id="IsActive">
+                            Is Active
+                        </label>
+
+            </div>
+      
+        </div>
+    </div>
+        </div>
+  
+
+ </form>
+
+                    </div>

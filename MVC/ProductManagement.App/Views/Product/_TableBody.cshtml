@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ProductWithPriceDto>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@item.CategoryName</td>
+        <td>@item.ProductName</td>
+        <td>@(item.Price_Usd?.ToString("#,0")??"0")</td>
+        <td>@(item.Price_Eur?.ToString("#,0")??"0")</td>
+        <td>@(item.Price_lira?.ToString("#,0")??"0")</td>
+     
+      
+        <td>
+
+            <span class="fa fa-pencil tree-status" onclick="EditProduct(@item.ProductId,this)" style="color:darkblue;" data-toggle="tooltip" title="Edit Product"></span>
+            <span class="fa fa-trash" onclick="DeleteProduct(@item.ProductId, '@item.ProductName', event)" style="color:red;" data-toggle="tooltip" title="Delete Product "></span>
+            @if (item.IsActive == true)
+            {
+                <span class="fa fa-eye tree-status " onclick="DeactiveProduct(@item.ProductId,'@item.ProductName', this)" style="color:green;" data-toggle="tooltip" title="Deactive Product"></span>
+            }
+            @if (item.IsActive == false)
+            {
+                <span class="fa fa-eye-slash  tree-status " onclick="ActiveProduct(@item.ProductId,'@item.ProductName', this)" style="color:lightgrey;" data-toggle="tooltip" title="Active Product"></span>
+            }
+           
+        </td>
+    </tr>
+}

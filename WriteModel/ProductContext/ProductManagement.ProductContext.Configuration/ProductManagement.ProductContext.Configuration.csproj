@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Framework\Framework.DependencyInjection\Framework.DependencyInjection.csproj" />
+    <ProjectReference Include="..\ProductManagement.ProductContext.ApplicationService\ProductManagement.ProductContext.ApplicationService.csproj" />
+    <ProjectReference Include="..\ProductManagement.ProductContext.Domain\ProductManagement.ProductContext.Domain.csproj" />
+    <ProjectReference Include="..\ProductManagement.ProductContext.Infrastructure.Persistence\ProductManagement.ProductContext.Infrastructure.Persistence.csproj" />
+    <ProjectReference Include="..\ProductManagement.ProductContext.Resources\ProductManagement.ProductContext.Resources.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Framework.Facade\Framework.Facade.csproj" />
+    <ProjectReference Include="..\..\ReadModel\ProductManagement.ReadModel.Configuration\ProductManagement.ReadModel.Configuration.csproj" />
+    <ProjectReference Include="..\..\WriteModel\ProductContext\ProductManagement.ProductContext.Configuration\ProductManagement.ProductContext.Configuration.csproj" />
+    <ProjectReference Include="..\..\WriteModel\ProductContext\ProductManagement.ProductContext.Facade.Contracts\ProductManagement.ProductContext.Facade.Contracts.csproj" />
+    <ProjectReference Include="..\..\WriteModel\UserContext\ProductManagement.UserContext.Configuration\ProductManagement.UserContext.Configuration.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Shared\Components\" />
+    <Folder Include="wwwroot\asset\global\plugins\glyph\" />
+  </ItemGroup>
+
+</Project>

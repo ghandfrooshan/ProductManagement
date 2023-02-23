@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Constant\ProductManagement.Constants\ProductManagement.Constants.csproj" />
+    <ProjectReference Include="..\..\..\Framework\Framework.Core\Framework.Core.csproj" />
+    <ProjectReference Include="..\ProductManagement.ProductContext.ApplicationService.Contracts\ProductManagement.ProductContext.ApplicationService.Contracts.csproj" />
+    <ProjectReference Include="..\ProductManagement.ProductContext.Domain\ProductManagement.ProductContext.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

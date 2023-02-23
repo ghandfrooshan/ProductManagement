@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ProductWithPriceDto>
+
+
+<div class="form-horizontal">
+    <div class="form-group">
+     
+
+        <i class="fa fa-plus tree-status" onclick="AddNewItem();" title="AddProduct" data-toggle="tooltip" style="margin-right: 25px; margin-top: 15px; color:dodgerblue;"> </i>
+    </div>
+</div>
+<table class="table table-striped text-center" id="product-table">
+    <thead class="bg-info">
+        <tr>
+            <th class="th-filter col-md-2">
+                <div class="table-filter">
+                   
+                    @Html.DisplayNameFor(x => x.CategoryName)
+                </div>
+                <div class="table-filter">
+                    <select name="CategoryId" id="CategoryId" class="form-control" onchange="GetProductByCategoryId()">
+                        <option value="" selected></option>
+                        @foreach (var type in ViewBag.Category)
+                        {
+                            <option value="@type.Id">@type.Name</option>
+                        }
+                    </select>
+                </div>
+            </th>
+
+            <th class="th-filter col-md-2">
+                <div class="table-filter">
+                   @* <i class="fa fa-sort selectable" style="color: #bdbcec;"></i>*@
+                    @Html.DisplayNameFor(x => x.ProductName)
+                </div>
+           
+            </th>
+            <th class="th-filter col-md-2">
+                <div class="table-filter">
+              
+                    @Html.DisplayNameFor(x => x.Price_Usd)
+                </div>
+
+            </th>
+
+            <th class="th-filter col-md-2">
+                <div class="table-filter">
+         
+                    @Html.DisplayNameFor(x => x.Price_Eur)
+                </div>
+
+            </th>
+
+            <th class="th-filter col-md-2">
+                <div class="table-filter">
+               
+                    @Html.DisplayNameFor(x => x.Price_lira)
+                </div>
+
+            </th>
+       
+
+            <th>Operation</th>
+        </tr>
+    </thead>
+    <tbody>
+        @await Html.PartialAsync("_TableBody", Model)
+    </tbody>
+</table>
+

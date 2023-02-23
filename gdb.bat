@@ -1,0 +1,2 @@
+
+DOTNET EF Scaffold-DbContext "Server =.; initial catalog = ProductManagement; integrated security = false;User ID=sa;Password='921';MultipleActiveResultSets=True; Application Name =  ProductManagementApp;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -ContextDir Models -OutPutDir Models -Project  ProductManagement.ReadModel.Context -Context ProductManagementContext   -force

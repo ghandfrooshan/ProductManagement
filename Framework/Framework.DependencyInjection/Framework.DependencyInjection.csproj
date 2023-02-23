@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ReadModel\ProductManagement.ReadModel.Queries.Contracts\ProductManagement.ReadModel.Queries.Contracts.csproj" />
+    <ProjectReference Include="..\..\ReadModel\ProductManagement.ReadModel.Queries.Facade\ProductManagement.ReadModel.Queries.Facade.csproj" />
+    <ProjectReference Include="..\..\WriteModel\ProductContext\ProductManagement.ProductContext.Facade\ProductManagement.ProductContext.Facade.csproj" />
+    <ProjectReference Include="..\..\WriteModel\ProductManagement.Persistence\ProductManagement.Persistence.csproj" />
+    <ProjectReference Include="..\..\WriteModel\UserContext\ProductManagement.UserContext.Facade.Contract\ProductManagement.UserContext.Facade.Contract.csproj" />
+    <ProjectReference Include="..\..\WriteModel\UserContext\ProductManagement.UserContext.Facade\ProductManagement.UserContext.Facade.csproj" />
+    <ProjectReference Include="..\Framework.Application\Framework.Application.csproj" />
+    <ProjectReference Include="..\Framework.AssemblyHelper\Framework.AssemblyHelper.csproj" />
+    <ProjectReference Include="..\Framework.Core\Framework.Core.csproj" />
+    <ProjectReference Include="..\Framework.Mapper\Framework.Mapper.csproj" />
+  </ItemGroup>
+
+</Project>

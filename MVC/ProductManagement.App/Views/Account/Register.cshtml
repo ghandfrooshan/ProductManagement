@@ -1,0 +1,44 @@
+﻿@model RegisterViewModel
+@{
+   
+    ViewBag.Title = "Register";
+   Layout = "~/Views/Account/_Layout.cshtml";
+}
+
+
+<div class="col-md-10 offset-md-1">
+    <section>
+
+<form asp-route-returnUrl="" method="post">
+ 
+   
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+           
+
+   
+        
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+       
+        
+            <div class="form-group">
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <div style="margin-top: 7px" class="col-12">
+    <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+</form>
+</section>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}    
